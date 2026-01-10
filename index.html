@@ -12,26 +12,19 @@
     <style>
         /* --- CSS Reset & Variables --- */
         :root {
-            /* Color Palette */
-            --color-bg-main: #0a0a0a;         /* Deep Black */
-            --color-bg-secondary: #161616;    /* Soft Black/Dark Grey */
-            --color-bg-card: #1f1f1f;         /* Card Background */
-            
-            --color-text-primary: #ffffff;    /* Pure White */
-            --color-text-secondary: #d1d1d1;  /* Readable Grey (High Contrast) */
-            --color-text-muted: #888888;      /* For less important text */
-            
-            --color-accent: #306EFF;          /* Primary Blue */
-            --color-accent-hover: #5387FF;    /* Lighter Blue */
-            
-            /* Spacing System */
+            --color-bg-main: #0a0a0a;
+            --color-bg-secondary: #161616;
+            --color-bg-card: #1f1f1f;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #d1d1d1;
+            --color-text-muted: #888888;
+            --color-accent: #306EFF;
+            --color-accent-hover: #5387FF;
             --spacing-xs: 8px;
             --spacing-sm: 16px;
             --spacing-md: 32px;
             --spacing-lg: 64px;
             --spacing-xl: 100px;
-            
-            /* Typography */
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
         }
@@ -50,7 +43,7 @@
             font-family: var(--font-body);
             background-color: var(--color-bg-main);
             color: var(--color-text-primary);
-            line-height: 1.7; /* Increased for readability */
+            line-height: 1.7;
             font-size: 16px;
             overflow-x: hidden;
         }
@@ -73,7 +66,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Section Styling */
         section {
             padding: var(--spacing-xl) 0;
         }
@@ -195,12 +187,11 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 80px; /* Offset for fixed nav */
+            padding-top: 80px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Background Glow Effect */
         #hero::before {
             content: '';
             position: absolute;
@@ -226,17 +217,16 @@
 
         .hero-intro {
             font-family: var(--font-heading);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--color-accent);
             font-weight: 600;
             letter-spacing: 1px;
-            text-transform: uppercase;
             margin-bottom: 15px;
             display: block;
         }
 
         .hero-name {
-            font-size: clamp(3rem, 5vw, 4.5rem); /* Responsive Font Size */
+            font-size: clamp(3rem, 5vw, 4.5rem);
             line-height: 1.1;
             margin-bottom: 20px;
             font-weight: 800;
@@ -279,7 +269,7 @@
             max-height: 600px;
             z-index: 2;
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-            border-radius: 20px; /* Slight rounding looks modern */
+            border-radius: 20px;
         }
         
         .hero-decoration {
@@ -352,7 +342,6 @@
             margin-bottom: 0;
         }
 
-        /* Zigzag Effect */
         .project-item:nth-child(even) {
             flex-direction: row-reverse;
         }
@@ -394,7 +383,7 @@
             font-size: 1.05rem;
         }
 
-        /* --- TECH STACK --- */
+        /* --- TECH STACK (Updated) --- */
         #techstack {
             background-color: var(--color-bg-secondary);
             text-align: center;
@@ -411,20 +400,30 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .tech-badge {
-            padding: 12px 24px;
+            padding: 15px 28px;
             background-color: var(--color-bg-main);
             border: 1px solid #333;
             color: var(--color-text-secondary);
             font-family: var(--font-heading);
             font-weight: 600;
             font-size: 0.9rem;
-            border-radius: 6px;
+            border-radius: 30px;
             transition: all 0.3s ease;
             cursor: default;
+            /* Flex layout for Icon alignment */
+            display: flex;
+            align-items: center;
+            gap: 16px; /* Gap-4 consistent spacing */
+        }
+
+        .tech-badge svg {
+            width: 18px;
+            height: 18px;
+            color: var(--color-accent);
         }
 
         .tech-badge:hover {
@@ -575,49 +574,21 @@
                 text-align: center;
                 padding-top: 20px;
             }
-            
-            .hero-role {
-                justify-content: center;
-            }
-            
-            .hero-desc {
-                margin: 0 auto 40px;
-            }
-            
-            .hero-image-wrapper {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .contact-wrapper {
-                flex-direction: column;
-            }
-            
-            .contact-form {
-                padding: 30px;
-            }
+            .hero-role { justify-content: center; }
+            .hero-desc { margin: 0 auto 40px; }
+            .hero-image-wrapper { width: 100%; justify-content: center; }
+            .contact-wrapper { flex-direction: column; }
+            .contact-form { padding: 30px; }
         }
 
         @media (max-width: 768px) {
-            /* Fix Zigzag for Mobile: Image always top, Text always bottom */
-            .project-item, 
-            .project-item:nth-child(even) {
+            .project-item, .project-item:nth-child(even) {
                 flex-direction: column;
                 gap: 30px;
             }
-            
-            .project-image {
-                width: 100%;
-                height: 250px;
-            }
-            
-            h2.section-title {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                display: none; /* In a real app, add a hamburger menu here */
-            }
+            .project-image { width: 100%; height: 250px; }
+            h2.section-title { font-size: 2rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -661,15 +632,15 @@
             <div class="about-grid">
                 <div class="about-card">
                     <h3><i data-feather="activity"></i> Current Status</h3>
-                    <p>Currently working as a Lead Developer at [Company Name], defining technical architecture and leading a team of 5 engineers toward launching our Q4 product suite.</p>
+                    <p>Currently specializing in UI/UX research and interactive prototyping, aiming to create seamless digital experiences for web and mobile platforms.</p>
                 </div>
                 <div class="about-card">
                     <h3><i data-feather="briefcase"></i> Experience</h3>
-                    <p>Over 6+ years of professional experience in full-stack development, delivering scalable web applications and optimizing frontend performance for high-traffic sites.</p>
+                    <p>Hands-on experience with modern design tools and front-end technologies, bridging the gap between design concepts and functional code.</p>
                 </div>
                 <div class="about-card">
                     <h3><i data-feather="target"></i> Focus Area</h3>
-                    <p>Deep-diving into Serverless architectures and exploring how advanced UI animation libraries can enhance user engagement without sacrificing load times.</p>
+                    <p>Dedicated to accessibility-driven design and exploring how motion design can improve user navigation and product storytelling.</p>
                 </div>
             </div>
         </div>
@@ -687,7 +658,7 @@
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">No Added Projects Yet</h3>
-                    <p class="project-description">A comprehensive analytics dashboard rebuilt from the ground up. We improved data visualization render times by 40% and introduced a dark mode theme that increased user session length.</p>
+                    <p class="project-description">A comprehensive analytics dashboard rebuilt from the ground up. We improved data visualization render times by 40% and introduced a dark mode theme.</p>
                     <a href="#" class="btn btn-outline">View Case Study</a>
                 </div>
             </div>
@@ -698,19 +669,8 @@
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">No Added Projects Yet</h3>
-                    <p class="project-description">A complete UX overhaul of a legacy e-commerce site. Focused on mobile-first design principles and streamlining the checkout process, resulting in a 15% conversion rate uplift.</p>
+                    <p class="project-description">A complete UX overhaul of a legacy e-commerce site focused on mobile-first design principles and streamlining the checkout process.</p>
                     <a href="#" class="btn btn-outline">View Live Site</a>
-                </div>
-            </div>
-
-             <div class="project-item">
-                <div class="project-image">
-                    <img src="https://placehold.co/800x600/1f1f1f/333333?text=Secure+FinTech+API" alt="FinTech API" class="project-img">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">No Added Projects Yet</h3>
-                    <p class="project-description">Developed a robust, secure RESTful API set for a new mobile banking application, implementing OAuth2 security and handling thousands of concurrent transactions securely.</p>
-                    <a href="#" class="btn btn-outline">Read Docs</a>
                 </div>
             </div>
         </div>
@@ -722,12 +682,12 @@
             <p style="color: var(--color-text-secondary); margin-top: 15px;">Technologies and tools I use to bring ideas to life.</p>
             
             <div class="stack-wrapper">
-                <div class="tech-badge">HTML</div>
-                <div class="tech-badge">CSS</div>
-                <div class="tech-badge">JAVASCRIPT</div>
-                <div class="tech-badge">FIGMA</div>
-                <div class="tech-badge">FRAMER</div>
-                <div class="tech-badge">ADOBE XD</div>
+                <div class="tech-badge">HTML <i data-feather="code"></i></div>
+                <div class="tech-badge">CSS <i data-feather="layers"></i></div>
+                <div class="tech-badge">JAVASCRIPT <i data-feather="terminal"></i></div>
+                <div class="tech-badge">FIGMA <i data-feather="figma"></i></div>
+                <div class="tech-badge">FRAMER <i data-feather="framer"></i></div>
+                <div class="tech-badge">ADOBE XD <i data-feather="edit-3"></i></div>
             </div>
         </div>
     </section>
