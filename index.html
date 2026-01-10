@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archiel R. Cabanag | Software Engineer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            /* Color Palette */
+            --color-bg-main: #0a0a0a;         /* Deep Black */
+            --color-bg-secondary: #161616;    /* Soft Black/Dark Grey */
+            --color-bg-card: #1f1f1f;         /* Card Background */
+            
+            --color-text-primary: #ffffff;    /* Pure White */
+            --color-text-secondary: #d1d1d1;  /* Readable Grey (High Contrast) */
+            --color-text-muted: #888888;      /* For less important text */
+            
+            --color-accent: #306EFF;          /* Primary Blue */
+            --color-accent-hover: #5387FF;    /* Lighter Blue */
+            
+            /* Spacing System */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 64px;
+            --spacing-xl: 100px;
+            
+            /* Typography */
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-main);
+            color: var(--color-text-primary);
+            line-height: 1.7; /* Increased for readability */
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* --- Global Typography --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* Section Styling */
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        h2.section-title {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        h2.section-title::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background-color: var(--color-accent);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        section:hover h2.section-title::after {
+            width: 100%;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: var(--color-accent);
+            color: white;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(48, 110, 255, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(48, 110, 255, 0.4);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-accent);
+            color: var(--color-accent);
+            padding: 12px 30px;
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--color-accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--color-accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px; /* Offset for fixed nav */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Glow Effect */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(48,110,255,0.1) 0%, rgba(10,10,10,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-intro {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 5vw, 4.5rem); /* Responsive Font Size */
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-role {
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .hero-role::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background-color: var(--color-accent);
+        }
+
+        .hero-desc {
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            max-width: 550px;
+            font-size: 1.1rem;
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 600px;
+            z-index: 2;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+            border-radius: 20px; /* Slight rounding looks modern */
+        }
+        
+        .hero-decoration {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            bottom: -20px;
+            right: -20px;
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        /* --- ABOUT SECTION --- */
+        #about {
+            background-color: var(--color-bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .about-card {
+            background: var(--color-bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: rgba(48, 110, 255, 0.2);
+        }
+
+        .about-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-card svg {
+            color: var(--color-accent);
+        }
+
+        .about-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* --- PROJECTS SECTION --- */
+        #projects {
+            background-color: var(--color-bg-main);
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 120px;
+        }
+        
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Zigzag Effect */
+        .project-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .project-image {
+            flex: 1.3;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            opacity: 0.8;
+        }
+        
+        .project-image:hover .project-img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .project-content {
+            flex: 1;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        /* --- TECH STACK --- */
+        #techstack {
+            background-color: var(--color-bg-secondary);
+            text-align: center;
+        }
+        
+        #techstack h2.section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .stack-wrapper {
+            max-width: 900px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .tech-badge {
+            padding: 12px 24px;
+            background-color: var(--color-bg-main);
+            border: 1px solid #333;
+            color: var(--color-text-secondary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--color-accent);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(48,110,255,0.15);
+        }
+
+        /* --- CONTACT SECTION --- */
+        #contact {
+            background-color: var(--color-bg-main);
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 80px;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .contact-desc {
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .contact-form {
+            flex: 1.2;
+            background: var(--color-bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #333;
+            padding: 15px 0;
+            color: white;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: border-color 0.3s ease;
+        }
+        
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--color-accent);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            color: var(--color-text-muted);
+            pointer-events: none;
+            transition: 0.3s ease all;
+        }
+
+        .form-input:focus ~ .form-label,
+        .form-input:not(:placeholder-shown) ~ .form-label {
+            top: -10px;
+            font-size: 0.8rem;
+            color: var(--color-accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-bg-secondary);
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--color-bg-main);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            border-color: var(--color-accent);
+            background: var(--color-accent);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 968px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 20px;
+            }
+            
+            .hero-role {
+                justify-content: center;
+            }
+            
+            .hero-desc {
+                margin: 0 auto 40px;
+            }
+            
+            .hero-image-wrapper {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .contact-wrapper {
+                flex-direction: column;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Fix Zigzag for Mobile: Image always top, Text always bottom */
+            .project-item, 
+            .project-item:nth-child(even) {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .project-image {
+                width: 100%;
+                height: 250px;
+            }
+            
+            h2.section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none; /* In a real app, add a hamburger menu here */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Portfolio <span>.</span></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#techstack">Stack</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-intro">Hello, I am</span>
+                <h1 class="hero-name">Archiel R. Cabanag</h1>
+                <div class="hero-role">Junior UI/UX Designer</div>
+                <p class="hero-desc">
+                    Junior UI/UX Designer with hands-on experience in Figma, wireframing, and design systems. Skilled in translating complex workflows into intuitive, accessible user interfaces.
+                </p>
+                <a href="#contact" class="btn">Let's Talk</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-decoration"></div>
+                <img src="Image.png" alt="Archiel R. Cabanag" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3><i data-feather="activity"></i> Current Status</h3>
+                    <p>Currently working as a Lead Developer at [Company Name], defining technical architecture and leading a team of 5 engineers toward launching our Q4 product suite.</p>
+                </div>
+                <div class="about-card">
+                    <h3><i data-feather="briefcase"></i> Experience</h3>
+                    <p>Over 6+ years of professional experience in full-stack development, delivering scalable web applications and optimizing frontend performance for high-traffic sites.</p>
+                </div>
+                <div class="about-card">
+                    <h3><i data-feather="target"></i> Focus Area</h3>
+                    <p>Deep-diving into Serverless architectures and exploring how advanced UI animation libraries can enhance user engagement without sacrificing load times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            
+            <div class="project-item">
+                <div class="project-image">
+                    <img src="https://placehold.co/800x600/1f1f1f/333333?text=Analytics+Dashboard" alt="Project Alpha" class="project-img">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">No Added Projects Yet</h3>
+                    <p class="project-description">A comprehensive analytics dashboard rebuilt from the ground up. We improved data visualization render times by 40% and introduced a dark mode theme that increased user session length.</p>
+                    <a href="#" class="btn btn-outline">View Case Study</a>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-image">
+                    <img src="https://placehold.co/800x600/1f1f1f/333333?text=E-Commerce+Redesign" alt="E-Commerce Redesign" class="project-img">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">No Added Projects Yet</h3>
+                    <p class="project-description">A complete UX overhaul of a legacy e-commerce site. Focused on mobile-first design principles and streamlining the checkout process, resulting in a 15% conversion rate uplift.</p>
+                    <a href="#" class="btn btn-outline">View Live Site</a>
+                </div>
+            </div>
+
+             <div class="project-item">
+                <div class="project-image">
+                    <img src="https://placehold.co/800x600/1f1f1f/333333?text=Secure+FinTech+API" alt="FinTech API" class="project-img">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">No Added Projects Yet</h3>
+                    <p class="project-description">Developed a robust, secure RESTful API set for a new mobile banking application, implementing OAuth2 security and handling thousands of concurrent transactions securely.</p>
+                    <a href="#" class="btn btn-outline">Read Docs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="techstack">
+        <div class="container">
+            <h2 class="section-title">Tech Stack</h2>
+            <p style="color: var(--color-text-secondary); margin-top: 15px;">Technologies and tools I use to bring ideas to life.</p>
+            
+            <div class="stack-wrapper">
+                <div class="tech-badge">HTML</div>
+                <div class="tech-badge">CSS</div>
+                <div class="tech-badge">JAVASCRIPT</div>
+                <div class="tech-badge">FIGMA</div>
+                <div class="tech-badge">FRAMER</div>
+                <div class="tech-badge">ADOBE XD</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-text">
+                    <div class="section-header">
+                        <h2 class="section-title">Get In Touch</h2>
+                    </div>
+                    <h3 class="contact-subtitle">Let's build something amazing together.</h3>
+                    <p class="contact-desc">Whether you have a project in mind, need technical consultation, or just want to connect, feel free to send me a message.</p>
+                    
+                    <div class="contact-details">
+                        <p><i data-feather="mail" style="color: var(--color-accent);"></i> cabanagarchielrosel@gmail.com</p>
+                        <p><i data-feather="map-pin" style="color: var(--color-accent);"></i> Cebu, Philippines</p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="fullname" class="form-input" placeholder=" " required>
+                            <label for="fullname" class="form-label">Full Name</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-input" placeholder=" " required>
+                            <label for="email" class="form-label">Email Address</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" class="form-input" placeholder=" " required></textarea>
+                            <label for="message" class="form-label">Your Message</label>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Archiel R. Cabanag</div>
+            <div class="social-links">
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+                <a href="#" class="social-icon" aria-label="GitHub"><i data-feather="github"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter"><i data-feather="twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="Instagram"><i data-feather="instagram"></i></a>
+            </div>
+            <p class="copyright">© 2023 Archiel R. Cabanag. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
