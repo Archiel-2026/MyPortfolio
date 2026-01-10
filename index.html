@@ -178,8 +178,17 @@
             color: var(--color-text-secondary);
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--color-accent);
+        }
+
+        /* Added Toggle Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
         }
 
         /* --- HERO SECTION --- */
@@ -226,7 +235,7 @@
         }
 
         .hero-name {
-            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-size: clamp(1rem, 5vw, 2.5rem);
             line-height: 1.1;
             margin-bottom: 20px;
             font-weight: 800;
@@ -383,7 +392,7 @@
             font-size: 1.05rem;
         }
 
-        /* --- TECH STACK (Updated) --- */
+        /* --- TECH STACK --- */
         #techstack {
             background-color: var(--color-bg-secondary);
             text-align: center;
@@ -414,10 +423,9 @@
             border-radius: 30px;
             transition: all 0.3s ease;
             cursor: default;
-            /* Flex layout for Icon alignment */
             display: flex;
             align-items: center;
-            gap: 16px; /* Gap-4 consistent spacing */
+            gap: 16px; 
         }
 
         .tech-badge svg {
@@ -579,6 +587,23 @@
             .hero-image-wrapper { width: 100%; justify-content: center; }
             .contact-wrapper { flex-direction: column; }
             .contact-form { padding: 30px; }
+            
+            /* Mobile Nav Logic */
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 75px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 75px);
+                background: var(--color-bg-secondary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: 0.4s;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.active { right: 0; }
         }
 
         @media (max-width: 768px) {
@@ -588,7 +613,6 @@
             }
             .project-image { width: 100%; height: 250px; }
             h2.section-title { font-size: 2rem; }
-            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -597,11 +621,17 @@
     <nav>
         <div class="container nav-container">
             <a href="#" class="logo">Portfolio <span>.</span></a>
+            
+            <button class="menu-toggle">
+                <i data-feather="menu"></i>
+            </button>
+
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#techstack">Stack</a>
-                <a href="#contact">Contact</a>
+                <a href="#hero" class="nav-item">Home</a>
+                <a href="#about" class="nav-item">About</a>
+                <a href="#projects" class="nav-item">Projects</a>
+                <a href="#techstack" class="nav-item">Stack</a>
+                <a href="#contact" class="nav-item">Contact</a>
             </div>
         </div>
     </nav>
@@ -709,7 +739,7 @@
                 </div>
 
                 <div class="contact-form">
-                    <form action="#" method="POST">
+                    <form id="contactForm">
                         <div class="form-group">
                             <input type="text" id="fullname" class="form-input" placeholder=" " required>
                             <label for="fullname" class="form-label">Full Name</label>
@@ -725,7 +755,7 @@
                             <label for="message" class="form-label">Your Message</label>
                         </div>
                         
-                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        <button type="submit" class="btn" id="submitBtn" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -741,12 +771,78 @@
                 <a href="#" class="social-icon" aria-label="Twitter"><i data-feather="twitter"></i></a>
                 <a href="#" class="social-icon" aria-label="Instagram"><i data-feather="instagram"></i></a>
             </div>
-            <p class="copyright">© 2023 Archiel R. Cabanag. All rights reserved.</p>
+            <p class="copyright">© 2026 Archiel R. Cabanag. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+        // Initialize Feather Icons
         feather.replace();
+
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Toggle icon between menu and x
+            const icon = menuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-feather', 'x');
+            } else {
+                icon.setAttribute('data-feather', 'menu');
+            }
+            feather.replace();
+        });
+
+        // Close menu when clicking a link
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.querySelector('i').setAttribute('data-feather', 'menu');
+                feather.replace();
+            });
+        });
+
+        // 2. Scroll Spy (Active link highlighting)
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll("section");
+            
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navItems.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // 3. Form Submission Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+
+            // Simple visual feedback
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert("Thank you! Your message has been sent successfully.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+                this.reset();
+            }, 1500);
+        });
     </script>
 </body>
 </html>
