@@ -118,6 +118,7 @@
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(48, 110, 255, 0.3);
+            margin-right: var(--spacing-sm);
         }
 
         .btn:hover {
@@ -132,6 +133,7 @@
             color: var(--color-accent);
             padding: 12px 30px;
             box-shadow: none;
+            margin-right: 0; 
         }
         
         .btn-outline:hover {
@@ -182,7 +184,6 @@
             color: var(--color-accent);
         }
 
-        /* Added Toggle Button */
         .menu-toggle {
             display: none;
             background: none;
@@ -222,6 +223,13 @@
 
         .hero-text {
             flex: 1;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 0;
+            flex-wrap: wrap;
         }
 
         .hero-intro {
@@ -361,14 +369,10 @@
             border-radius: 12px;
             overflow: hidden;
             
-            /* ADDED: Padding inside the border, creating a gap */
             padding: 10px; 
-            /* ADDED: Background color to fill the padding area */
             background-color: var(--color-bg-secondary); 
             
-            /* UPDATED: Subtler white border (20% opacity) */
             border: 3px solid rgba(255, 255, 255, 0.2); 
-            /* UPDATED: Subtler white shadow */
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08); 
             
             position: relative;
@@ -376,9 +380,7 @@
         }
 
         .project-image:hover {
-            /* Slightly lighter/more opaque on hover (40% opacity) */
             border-color: rgba(255, 255, 255, 0.4); 
-            /* Stronger white shadow on hover */
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15); 
             transform: translateY(-5px); 
         }
@@ -386,11 +388,10 @@
         .project-img {
             width: 100%;
             height: 100%;
-            /* The image now fills the space *inside* the 10px padding */
             object-fit: cover;
             transition: transform 0.6s ease;
             opacity: 0.8;
-            border-radius: 8px; /* Added slight inner border-radius for aesthetics */
+            border-radius: 8px;
         }
         
         .project-image:hover .project-img {
@@ -433,7 +434,6 @@
             gap: 25px; 
         }
 
-        /* REDESIGNED TECH STACK CONTAINER */
         .tech-badge {
             display: flex;
             flex-direction: column; 
@@ -468,7 +468,6 @@
             transform: translateY(-5px); 
             box-shadow: 0 10px 20px rgba(48,110,255,0.25);
         }
-        /* END REDESIGNED TECH STACK CONTAINER */
 
         /* --- CONTACT SECTION --- */
         #contact {
@@ -599,6 +598,47 @@
             transform: translateY(-5px);
         }
 
+        /* --- NEW MODAL STYLES --- */
+        .loading-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .loading-content {
+            background-color: var(--color-bg-card); /* Consistent card background */
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid var(--color-accent); /* Blue accent border */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .loader {
+            border: 4px solid var(--color-bg-secondary);
+            border-top: 4px solid var(--color-accent); /* Blue accent for the spinning part */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 968px) {
             .hero-content {
@@ -609,10 +649,10 @@
             .hero-role { justify-content: center; }
             .hero-desc { margin: 0 auto 40px; }
             .hero-image-wrapper { width: 100%; justify-content: center; }
+            .hero-actions { justify-content: center; }
             .contact-wrapper { flex-direction: column; }
             .contact-form { padding: 30px; }
             
-            /* Mobile Nav Logic */
             .menu-toggle { display: block; }
             .nav-links {
                 position: fixed;
@@ -634,7 +674,7 @@
             .project-item, .project-item:nth-child(even) {
                 flex-direction: column;
                 gap: 30px;
-                padding: 0; /* Ensures no padding remains from the previous container style */
+                padding: 0;
             }
             .project-image { width: 100%; height: 250px; }
             h2.section-title { font-size: 2rem; }
@@ -680,11 +720,14 @@
                 <p class="hero-desc">
                     Junior UI/UX Designer with hands-on experience in Figma, wireframing, and design systems. Skilled in translating complex workflows into intuitive, accessible user interfaces.
                 </p>
-                <a href="#contact" class="btn">Let's Talk</a>
-            </div>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn">Let's Talk</a>
+                    <button id="downloadCvBtn" class="btn btn-outline">Download CV</button>
+                </div>
+                </div>
             <div class="hero-image-wrapper">
                 <div class="hero-decoration"></div>
-                <img src="Image.png" alt="Archiel R. Cabanag" class="hero-img">
+                <img src="Image.png" alt="Archiel R. Cabanag" class="hero-img"> 
             </div>
         </div>
     </section>
@@ -780,7 +823,7 @@
                     
                     <div class="contact-details">
                         <p><i data-feather="mail" style="color: var(--color-accent);"></i> cabanagarchielrosel@gmail.com</p>
-                        <p><i data-feather="map-pin" style="color: var(--color-accent);"></i> Cebu, Philippines</p>
+                        <p><i data-feather="map-pin" style="color: var(--color-accent);"></i> Cebu City, Philippines</p>
                     </div>
                 </div>
 
@@ -820,7 +863,13 @@
             <p class="copyright">© 2026 Archiel R. Cabanag. All rights reserved.</p>
         </div>
     </footer>
-
+    
+    <div id="loadingModal" class="loading-modal">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p style="color: var(--color-text-primary); margin-bottom: 0;">Preparing your CV for download...</p>
+        </div>
+    </div>
     <script>
         // Initialize Feather Icons
         feather.replace();
@@ -829,10 +878,10 @@
         const menuBtn = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         const navItems = document.querySelectorAll('.nav-item');
+        const loadingModal = document.getElementById('loadingModal');
 
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Toggle icon between menu and x
             const icon = menuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.setAttribute('data-feather', 'x');
@@ -858,15 +907,16 @@
             
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 150) {
+                // Subtract nav height + some offset for better visual cue
+                if (pageYOffset >= sectionTop - 150) { 
                     current = section.getAttribute("id");
                 }
             });
 
             navItems.forEach((link) => {
                 link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
+                // Check if the link href contains the current section id
+                if (link.getAttribute("href") && link.getAttribute("href").includes(current)) { 
                     link.classList.add("active");
                 }
             });
@@ -878,16 +928,41 @@
             const btn = document.getElementById('submitBtn');
             const originalText = btn.innerText;
 
-            // Simple visual feedback
             btn.innerText = "Sending...";
             btn.disabled = true;
 
+            // Simulate server-side processing delay
             setTimeout(() => {
                 alert("Thank you! Your message has been sent successfully.");
                 btn.innerText = originalText;
                 btn.disabled = false;
                 this.reset();
             }, 1500);
+        });
+
+        // 4. Download CV Functionality (UPDATED with Modal)
+        document.getElementById('downloadCvBtn').addEventListener('click', function() {
+            const cvUrl = 'Archiel R. Cabanag - Resume.pdf'; 
+            
+            // Show the loading modal
+            loadingModal.style.display = 'flex';
+
+            // Simulate the download delay
+            setTimeout(() => {
+                // Perform the actual download
+                const link = document.createElement('a');
+                link.href = cvUrl;
+                link.download = 'Archiel R. Cabanag - Resume.pdf'; 
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Hide the loading modal after the download link has been triggered
+                // Note: The download itself happens in the background/separate thread, 
+                // so the modal closes after the link is clicked.
+                loadingModal.style.display = 'none';
+
+            }, 2000); // 2-second delay for the user to see the modal
         });
     </script>
 </body>
