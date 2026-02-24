@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32">
+  <!-- Black circle with padding -->
+  <circle cx="32" cy="32" r="32" fill="black"/>
+  <!-- Small white 'A' centered -->
+  <!-- Add padding by reducing font size and adjusting position -->
+  <text x="32" y="32" text-anchor="middle" dominant-baseline="middle" font-size="36" fill="white" font-family="Arial, Helvetica, sans-serif">A</text>
+</svg>
