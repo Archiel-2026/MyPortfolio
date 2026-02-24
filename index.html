@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archiel R. Cabanag | Junior UI/UX Designer</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -30,8 +30,8 @@
             --spacing-md: 32px;
             --spacing-lg: 64px;
             --spacing-xl: 100px;
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Open Sans', sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Poppins', sans-serif;
         }
 
         .light-mode {
@@ -73,7 +73,7 @@
         /* --- Global Typography --- */
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
-            font-weight: 700;
+            font-weight: 500;
             color: var(--color-text-primary);
             line-height: 1.2;
         }
@@ -108,6 +108,7 @@
             position: relative;
             display: inline-block;
             z-index: 1;
+            font-weight: 500;
         }
         
         h2.section-title::after {
@@ -136,7 +137,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             border: none;
-            border-radius: 30px;
+            border-radius: 4px;
             cursor: pointer;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
@@ -156,7 +157,8 @@
             color: var(--color-accent);
             padding: 12px 30px;
             box-shadow: none;
-            margin-right: 0; 
+            margin-right: 0;
+            border-radius: 8px;
         }
         
         .btn-outline:hover {
@@ -190,7 +192,7 @@
 
         .logo {
             font-family: var(--font-heading);
-            font-weight: 800;
+            font-weight: 500;
             font-size: 1.2rem;
             letter-spacing: -1px;
         }
@@ -316,7 +318,7 @@
             font-size: clamp(1rem, 5vw, 2.5rem);
             line-height: 1.1;
             margin-bottom: 20px;
-            font-weight: 800;
+            font-weight: 500;
         }
 
         .hero-role {
@@ -462,10 +464,7 @@
             border-radius: 8px;
         }
         
-        .project-image:hover .project-img {
-            transform: scale(1.05);
-            opacity: 1;
-        }
+    
 
         .project-content {
             flex: 1;
@@ -474,18 +473,21 @@
         .project-title {
             font-size: 2rem;
             margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .project-description {
             color: var(--color-text-secondary);
             margin-bottom: 30px;
-            font-size: 1.05rem;
-        }
-
-        /* --- TECH STACK --- */
-        #techstack {
-            background-color: var(--color-bg-secondary);
-            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.75;
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            text-align: left;
         }
         
         #techstack h2.section-title::after {
@@ -499,28 +501,34 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px; 
+            align-items: center;
+            gap: 32px 40px;
+        }
+        .tech-badge {
+            flex: 0 1 calc(25% - 40px);
+            margin-bottom: 32px;
         }
 
         .tech-badge {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 130px; 
-            height: 130px; 
-            background-color: var(--color-bg-card); 
+            width: 140px;
+            height: 140px;
+            background-color: var(--color-bg-card);
             border: 2px solid var(--color-border);
             color: var(--color-text-primary);
             font-family: var(--font-heading);
             font-weight: 600;
-            font-size: 0.8rem;
-            border-radius: 15px; 
+            font-size: 0.9rem;
+            border-radius: 18px;
             transition: all 0.3s ease;
             cursor: default;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             box-shadow: 0 5px 15px var(--shadow-color);
+            margin: 0;
         }
 
         .tech-badge svg {
@@ -553,15 +561,17 @@
         }
         
         .contact-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--color-text-primary);
+            font-size: 1.2rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+            font-weight: 500;
         }
         
         .contact-desc {
             color: var(--color-text-secondary);
-            margin-bottom: 40px;
-            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            text-align: left;
         }
         
         .contact-details p {
@@ -636,7 +646,7 @@
 
         .footer-logo {
             font-family: var(--font-heading);
-            font-weight: 800;
+            font-weight: 500;
             font-size: 1.8rem;
             color: var(--color-text-primary);
             margin-bottom: 30px;
@@ -849,24 +859,36 @@
             
             <div class="project-item">
                 <div class="project-image">
-                    <img src="Project.png" alt="Project Alpha" class="project-img">
+                    <img src="Final Project.png" alt="Project Alpha" class="project-img">
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">Digital Platform for Barangay Health Records</h3>
                     <p class="project-description">The Barangay Health Monitoring and Tracking System is a digital platform designed to streamline the management of community health records and improve accessibility for both health workers and residents.
 </p>
-                    <a href="#" class="btn btn-outline">View Case Study</a>
+                                    <a href="#" class="btn btn-outline" id="viewCaseStudyBtn">View Case Study</a>
+                        <script>
+                            // Open the PDF file in a new tab when the button is clicked
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var btn = document.getElementById('viewCaseStudyBtn');
+                                if (btn) {
+                                    btn.addEventListener('click', function(e) {
+                                        e.preventDefault();
+                                        window.open('Case Study.pdf', '_blank'); // Change 'Case.pdf' to your actual PDF file path
+                                    });
+                                }
+                            });
+                        </script>
                 </div>
             </div>
 
             <div class="project-item">
                 <div class="project-image">
-                    <img src="UP.png" alt="E-Commerce Redesign" class="project-img">
+                    <img src="Analytics.png" alt="E-Commerce Redesign" class="project-img">
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">Demographic Trends in UP Enrollment</h3>
                     <p class="project-description">This project examines the demographic composition of students enrolled at the University of the Philippines (UP) across multiple academic years, with a focus on sex-based distribution. By analyzing official enrollment records.</p>
-                    <a href="#" class="btn btn-outline">View Live Site</a>
+                    <a href="https://our.upcebu.edu.ph/enrollment-data-graph/" class="btn btn-outline">View Live Site</a>
                 </div>
             </div>
         </div>
@@ -898,10 +920,7 @@
         <i data-feather="git-merge"></i>
         GIT
     </div>
-    <div class="tech-badge">
-        <i data-feather="github"></i>
-        GITHUB
-    </div>
+    <!-- GitHub badge removed -->
     <div class="tech-badge">
         <i data-feather="figma"></i>
         FIGMA
@@ -910,10 +929,7 @@
         <i data-feather="box"></i>
         FRAMER
     </div>
-    <div class="tech-badge">
-        <i data-feather="edit-3"></i>
-        ADOBE XD
-    </div>
+    <!-- Adobe XD removed -->
     <div class="tech-badge">
         <i data-feather="trello"></i>
         JIRA
@@ -951,7 +967,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <textarea id="message" class="form-input" placeholder=" " required></textarea>
+                            <textarea id="message" class="form-input" placeholder="Your message..." required></textarea>
                             <label for="message" class="form-label">Your Message</label>
                         </div>
                         
@@ -1078,13 +1094,33 @@
             btn.innerText = "Sending...";
             btn.disabled = true;
 
-            // Simulate server-side processing delay
-            setTimeout(() => {
-                alert("Thank you! Your message has been sent successfully.");
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            fetch('http://localhost:3001/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fullname, email, message })
+            })
+            .then(async (response) => {
+                if (response.ok) {
+                    alert("Thank you! Your message has been sent successfully.");
+                    this.reset();
+                } else {
+                    const data = await response.json();
+                    alert("Failed to send message: " + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(() => {
+                alert("Failed to send message. Please try again later.");
+            })
+            .finally(() => {
                 btn.innerText = originalText;
                 btn.disabled = false;
-                this.reset();
-            }, 1500);
+            });
         });
 
         // 4. Download CV Functionality (UPDATED with Modal)
