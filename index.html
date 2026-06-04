@@ -138,7 +138,6 @@
       line-height: 1.2;
     }
 
-    /* Desktop nav links */
     .nav-links {
       display: flex;
       gap: 4px;
@@ -169,25 +168,102 @@
       gap: 8px;
       align-items: center;
       flex-shrink: 0;
+      position: relative;
     }
-    .theme-toggle {
+    
+    /* Theme Dropdown - Unique Icon Dropdown */
+    .theme-dropdown {
+      position: relative;
+    }
+    .theme-trigger {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 7px 12px;
       border-radius: 8px;
       cursor: pointer;
-      font-family: "Poppins", sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: var(--transition);
-      white-space: nowrap;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      padding: 0;
     }
-    .theme-toggle:hover {
+    .theme-trigger:hover {
       border-color: var(--accent);
       color: var(--accent);
+      transform: translateY(-1px);
     }
+    .theme-trigger svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .theme-menu {
+      position: absolute;
+      top: 44px;
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.02);
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+      z-index: 200;
+      backdrop-filter: blur(12px);
+      background: rgba(var(--surface-rgb, 255,255,255), 0.95);
+      overflow: hidden;
+    }
+    [data-theme="dark"] .theme-menu {
+      background: rgba(26, 29, 36, 0.95);
+    }
+    .theme-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      font-family: "Poppins", sans-serif;
+    }
+    .theme-option:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .theme-option.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .theme-option svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    .theme-option .check-icon {
+      margin-left: auto;
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+    }
+    
     .btn-connect {
       background: var(--accent);
       color: white;
@@ -200,7 +276,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: var(--transition);
       font-family: "Poppins", sans-serif;
       letter-spacing: -0.01em;
@@ -210,8 +286,14 @@
       background: var(--accent-hover);
       transform: translateY(-1px);
     }
+    .btn-connect svg {
+      width: 14px;
+      height: 14px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
 
-    /* Burger button - hidden on desktop */
     .burger-btn {
       display: none;
       background: none;
@@ -243,7 +325,6 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Mobile menu overlay */
     .mobile-menu {
       display: none;
       position: fixed;
@@ -283,7 +364,6 @@
       color: var(--accent);
     }
 
-    /* Sections */
     .section {
       padding: 80px 0;
     }
@@ -344,18 +424,6 @@
       color: var(--accent);
       position: relative;
     }
-    .hero-text h1 .highlight::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: var(--accent);
-      opacity: 0.2;
-      border-radius: 2px;
-      z-index: -1;
-    }
     .hero-text .bio {
       font-size: 0.95rem;
       color: var(--text-secondary);
@@ -380,7 +448,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       transition: var(--transition);
       font-family: "Poppins", sans-serif;
       letter-spacing: -0.01em;
@@ -389,6 +457,13 @@
       background: var(--accent-hover);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+    }
+    .btn-primary svg {
+      width: 16px;
+      height: 16px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
     }
     .btn-secondary {
       background: var(--surface);
@@ -402,7 +477,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       transition: var(--transition);
       font-family: "Poppins", sans-serif;
       letter-spacing: -0.01em;
@@ -411,6 +486,13 @@
       border-color: var(--accent);
       background: var(--accent-soft);
       color: var(--accent);
+    }
+    .btn-secondary svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
     }
     .hero-visual {
       position: relative;
@@ -421,9 +503,6 @@
       overflow: hidden;
       box-shadow: 0 24px 48px rgba(0,0,0,0.08);
       border: 2px solid var(--border);
-    }
-    [data-theme="dark"] .hero-image-frame {
-      box-shadow: 0 24px 48px rgba(0,0,0,0.35);
     }
     .hero-image-frame img {
       width: 100%;
@@ -461,7 +540,6 @@
       background: #10B981;
       border-radius: 50%;
       animation: pulse 2s infinite;
-      flex-shrink: 0;
     }
     .hero-badge .company-row {
       display: flex;
@@ -480,7 +558,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
       padding: 6px 12px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
@@ -488,14 +565,12 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
     }
 
-    /* Stats Bar */
     .stats-bar {
       display: flex;
       gap: 2px;
@@ -527,7 +602,7 @@
       margin-top: 6px;
     }
 
-    /* Work Grid */
+    /* Work Grid - Visible Number Style */
     .work-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -555,7 +630,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       transition: transform 0.5s ease;
     }
     .work-card:hover .work-card-image img {
@@ -567,16 +641,21 @@
     .work-card-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 14px;
     }
+    /* Make the number clearly visible */
     .work-index {
       font-family: "Poppins", sans-serif;
-      font-size: 2rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: var(--text);
-      opacity: 0.06;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 12px;
+      border-radius: 30px;
       line-height: 1;
+      letter-spacing: -0.02em;
+      display: inline-block;
     }
     .work-category {
       font-family: "Poppins", sans-serif;
@@ -615,7 +694,6 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       color: var(--text-secondary);
-      letter-spacing: 0.02em;
       font-weight: 500;
     }
     .work-link {
@@ -625,15 +703,21 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: gap 0.3s;
       cursor: pointer;
     }
     .work-link:hover {
-      gap: 9px;
+      gap: 10px;
+    }
+    .work-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
     }
 
-    /* Certificates */
     .certs-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -672,7 +756,6 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
     }
     .cert-info h4 {
       font-weight: 600;
@@ -682,11 +765,8 @@
     .cert-info p {
       font-size: 0.68rem;
       color: var(--text-muted);
-      font-family: "Poppins", sans-serif;
-      letter-spacing: 0.02em;
     }
 
-    /* Stack */
     .stack-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -702,8 +782,6 @@
       font-size: 0.75rem;
       transition: var(--transition);
       cursor: default;
-      font-family: "Poppins", sans-serif;
-      letter-spacing: -0.01em;
       box-shadow: var(--shadow-card);
     }
     .stack-chip:hover {
@@ -712,7 +790,6 @@
       color: var(--accent);
     }
 
-    /* Footer */
     .site-footer {
       border-top: 1px solid var(--border);
       padding: 28px 0;
@@ -740,7 +817,6 @@
       color: var(--accent);
     }
 
-    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -769,7 +845,6 @@
       font-size: 1.8rem;
       color: white;
       cursor: pointer;
-      font-family: "Poppins", sans-serif;
       background: rgba(255,255,255,0.1);
       width: 38px;
       height: 38px;
@@ -780,328 +855,44 @@
       border: none;
     }
 
-    /* Tablet (768px - 1024px) */
     @media (max-width: 1024px) {
-      .container {
-        padding: 0 28px;
-      }
-      .hero-grid {
-        gap: 40px;
-      }
-      .hero-text h1 {
-        font-size: clamp(2rem, 4.5vw, 3.5rem);
-      }
-      .hero-text .bio {
-        font-size: 0.9rem;
-        max-width: 380px;
-      }
-      .work-grid {
-        gap: 16px;
-      }
-      .work-card-image {
-        height: 180px;
-      }
-      .work-card-body {
-        padding: 20px 22px 24px;
-      }
-      .work-title {
-        font-size: 1.05rem;
-      }
-      .work-desc {
-        font-size: 0.75rem;
-      }
-      .certs-grid {
-        gap: 14px;
-      }
-      .cert-card {
-        padding: 20px 22px;
-      }
-      .section-heading {
-        font-size: 1.9rem;
-      }
+      .container { padding: 0 28px; }
+      .hero-grid { gap: 40px; }
+      .work-grid { gap: 16px; }
+      .section-heading { font-size: 1.9rem; }
     }
 
-    /* Small Tablet & Large Phone (768px and below) - Burger menu active */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 24px;
-      }
-      .nav-inner {
-        padding: 0 24px;
-      }
-      /* Hide desktop nav links */
-      .nav-links {
-        display: none;
-      }
-      /* Show burger button */
-      .burger-btn {
-        display: flex;
-      }
-      .theme-toggle {
-        padding: 6px 10px;
-        font-size: 0.6rem;
-      }
-      .btn-connect {
-        padding: 8px 14px;
-        font-size: 0.72rem;
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        min-height: auto;
-        padding-top: 60px;
-      }
-      .hero-text {
-        order: 1;
-      }
-      .hero-visual {
-        order: 0;
-        max-width: 380px;
-        margin: 0 auto;
-      }
-      .hero-text h1 {
-        font-size: 2.6rem;
-        text-align: center;
-      }
-      .hero-text .greeting {
-        text-align: center;
-        display: block;
-      }
-      .hero-text .bio {
-        text-align: center;
-        max-width: 100%;
-        font-size: 0.88rem;
-      }
-      .hero-actions {
-        justify-content: center;
-      }
-      .hero-badge {
-        right: -8px;
-        bottom: -12px;
-        max-width: 190px;
-        padding: 12px 14px;
-        font-size: 0.72rem;
-      }
-      .hero-badge .status-row {
-        font-size: 0.7rem;
-      }
-      .hero-badge .company-logo {
-        height: 32px;
-        padding: 5px 10px;
-      }
-      .work-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-      .work-card-image {
-        height: 200px;
-      }
-      .certs-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-      .stats-bar {
-        flex-wrap: wrap;
-        margin-top: 48px;
-      }
-      .stat-unit {
-        flex: 1 1 50%;
-        padding: 20px 12px;
-      }
-      .stat-value {
-        font-size: 1.5rem;
-      }
-      .section {
-        padding: 60px 0;
-      }
-      .section-heading {
-        font-size: 1.7rem;
-        text-align: center;
-      }
-      .section-subtitle {
-        text-align: center;
-        max-width: 100%;
-        font-size: 0.88rem;
-      }
-      .section-tag {
-        display: block;
-        text-align: center;
-        width: fit-content;
-        margin: 0 auto 10px;
-      }
-      .stack-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-        gap: 8px;
-      }
-      .stack-chip {
-        padding: 10px 14px;
-        font-size: 0.7rem;
-      }
-      .site-footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-      }
-      .footer-socials {
-        justify-content: center;
-      }
+      .container { padding: 0 24px; }
+      .nav-inner { padding: 0 24px; }
+      .nav-links { display: none; }
+      .burger-btn { display: flex; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 60px; }
+      .hero-text { order: 1; }
+      .hero-visual { order: 0; max-width: 380px; margin: 0 auto; }
+      .hero-text h1 { font-size: 2.6rem; text-align: center; }
+      .hero-text .greeting { text-align: center; display: block; }
+      .hero-text .bio { text-align: center; max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .work-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .stats-bar { flex-wrap: wrap; margin-top: 48px; }
+      .stat-unit { flex: 1 1 50%; padding: 20px 12px; }
+      .section { padding: 60px 0; }
+      .section-heading { text-align: center; }
+      .section-subtitle { text-align: center; max-width: 100%; }
+      .section-tag { display: block; text-align: center; width: fit-content; margin: 0 auto 10px; }
+      .site-footer { flex-direction: column; text-align: center; }
     }
 
-    /* Mobile (320px - 640px) */
     @media (max-width: 640px) {
-      .container {
-        padding: 0 20px;
-      }
-      .nav-inner {
-        padding: 0 20px;
-      }
-      .nav-brand-name {
-        font-size: 0.9rem;
-      }
-      .nav-brand-role {
-        font-size: 0.6rem;
-      }
-      .btn-connect {
-        padding: 7px 12px;
-        font-size: 0.68rem;
-        gap: 3px;
-      }
-      .theme-toggle {
-        padding: 5px 8px;
-        font-size: 0.55rem;
-      }
-      .burger-btn {
-        width: 28px;
-        height: 20px;
-        gap: 4px;
-        padding: 4px;
-      }
-      .hero-grid {
-        gap: 32px;
-        padding-top: 50px;
-      }
-      .hero-visual {
-        max-width: 300px;
-      }
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .hero-text .bio {
-        font-size: 0.82rem;
-      }
-      .hero-actions {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-        padding: 12px 20px;
-        font-size: 0.8rem;
-      }
-      .hero-badge {
-        right: -4px;
-        bottom: -8px;
-        max-width: 170px;
-        padding: 10px 12px;
-        border-radius: 10px;
-        gap: 8px;
-      }
-      .hero-badge .status-row {
-        font-size: 0.65rem;
-        gap: 5px;
-      }
-      .hero-badge .dot {
-        width: 6px;
-        height: 6px;
-      }
-      .hero-badge .company-logo {
-        height: 28px;
-        padding: 4px 8px;
-        border-radius: 6px;
-      }
-      .stats-bar {
-        margin-top: 40px;
-      }
-      .stat-unit {
-        padding: 16px 8px;
-      }
-      .stat-value {
-        font-size: 1.3rem;
-      }
-      .stat-label {
-        font-size: 0.55rem;
-      }
-      .work-card-image {
-        height: 180px;
-      }
-      .work-card-body {
-        padding: 18px 20px 22px;
-      }
-      .work-title {
-        font-size: 1rem;
-      }
-      .work-desc {
-        font-size: 0.73rem;
-      }
-      .work-tag {
-        font-size: 0.6rem;
-        padding: 2px 7px;
-      }
-      .work-link {
-        font-size: 0.73rem;
-      }
-      .cert-card {
-        padding: 18px 20px;
-        gap: 14px;
-      }
-      .cert-logo-box {
-        width: 42px;
-        height: 42px;
-      }
-      .cert-info h4 {
-        font-size: 0.78rem;
-      }
-      .cert-info p {
-        font-size: 0.65rem;
-      }
-      .section {
-        padding: 48px 0;
-      }
-      .section-heading {
-        font-size: 1.5rem;
-      }
-      .section-subtitle {
-        font-size: 0.82rem;
-        margin-bottom: 32px;
-      }
-      .stack-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-      }
-      .stack-chip {
-        padding: 10px 12px;
-        font-size: 0.68rem;
-      }
-      .site-footer {
-        padding: 20px 0;
-        margin-top: 48px;
-        font-size: 0.68rem;
-      }
-      .footer-socials {
-        gap: 12px;
-      }
-      .footer-socials a {
-        font-size: 0.68rem;
-      }
-      .lightbox-close {
-        top: 16px;
-        right: 20px;
-        width: 32px;
-        height: 32px;
-        font-size: 1.4rem;
-      }
+      .container { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; }
+      .hero-visual { max-width: 300px; }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .stack-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -1113,25 +904,40 @@
         <span class="nav-brand-name">Archiel R. Cabanag</span>
         <span class="nav-brand-role">Product Designer</span>
       </a>
-      <!-- Desktop Navigation -->
       <ul class="nav-links" id="desktopNav">
         <li><button data-page="home" class="active">Home</button></li>
         <li><button data-page="work">Work</button></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle">LIGHT/DARK</button>
-        <a href="mailto:cabanagarchielrosel@gmail.com" class="btn-connect">Let's talk ↗</a>
-        <!-- Burger Button -->
-        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <!-- Theme Dropdown with Icon -->
+        <div class="theme-dropdown" id="themeDropdown">
+          <button class="theme-trigger" id="themeTrigger" aria-label="Theme settings">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <div class="theme-menu" id="themeMenu">
+            <div class="theme-option" data-theme-value="light">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+              <span>Light</span>
+              <svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="theme-option" data-theme-value="dark">
+              <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span>Dark</span>
+              <svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="theme-option" data-theme-value="system">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>System</span>
+              <svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+        </div>
+        <a href="mailto:cabanagarchielrosel@gmail.com" class="btn-connect">Let's talk <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="15 6 19 12 15 18"/></svg></a>
+        <button class="burger-btn" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu Overlay -->
   <div class="mobile-menu" id="mobileMenu">
     <button data-page="home" class="active">Home</button>
     <button data-page="work">Work</button>
@@ -1146,8 +952,8 @@
             <h1>Archiel <span class="highlight">Cabanag</span></h1>
             <p class="bio">Product designer focused on crafting clean, functional interfaces. I bridge the gap between user needs and business goals — designing with precision in Figma and building with modern web standards.</p>
             <div class="hero-actions">
-              <a href="mailto:cabanagarchielrosel@gmail.com" class="btn-primary">Get in touch →</a>
-              <button id="downloadCV" class="btn-secondary">Download CV ↓</button>
+              <a href="mailto:cabanagarchielrosel@gmail.com" class="btn-primary">Get in touch <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="15 6 19 12 15 18"/></svg></a>
+              <button id="downloadCV" class="btn-secondary">Download CV <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/><line x1="12" y1="15" x2="12" y2="3"/><line x1="4" y1="21" x2="20" y2="21"/></svg></button>
             </div>
           </div>
           <div class="hero-visual">
@@ -1155,179 +961,25 @@
               <img src="productive.JPG" alt="Archiel Cabanag" onerror="this.src='https://placehold.co/600x750?text=Archiel+Cabanag'">
             </div>
             <div class="hero-badge">
-              <div class="status-row">
-                <span class="dot"></span> Currently Employed
-              </div>
-              <div class="company-row">
-                <div class="company-logo">
-                  <img src="RNET.png" alt="RuralNet Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=font-size:1rem;color:#2563EB;font-weight:700;>RNET</span>';">
-                </div>
-              </div>
+              <div class="status-row"><span class="dot"></span> Currently Employed</div>
+              <div class="company-row"><div class="company-logo"><img src="RNET.png" alt="RuralNet Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=font-size:1rem;color:#2563EB;font-weight:700;>RNET</span>';"></div></div>
             </div>
           </div>
         </div>
-
         <div class="stats-bar">
-          <div class="stat-unit">
-            <div class="stat-value">1.5</div>
-            <div class="stat-label">Years Exp.</div>
-          </div>
-          <div class="stat-unit">
-            <div class="stat-value">4+</div>
-            <div class="stat-label">Projects</div>
-          </div>
-          <div class="stat-unit">
-            <div class="stat-value">8</div>
-            <div class="stat-label">Tools</div>
-          </div>
-          <div class="stat-unit">
-            <div class="stat-value">Cebu</div>
-            <div class="stat-label">Location</div>
-          </div>
+          <div class="stat-unit"><div class="stat-value">1.5</div><div class="stat-label">Years Exp.</div></div>
+          <div class="stat-unit"><div class="stat-value">4+</div><div class="stat-label">Projects</div></div>
+          <div class="stat-unit"><div class="stat-value">8</div><div class="stat-label">Tools</div></div>
+          <div class="stat-unit"><div class="stat-value">Cebu</div><div class="stat-label">Location</div></div>
         </div>
       </div>
     </section>
   </div>
 
   <div id="workPage" style="display: none;">
-    <section class="section" style="padding-top: 100px;">
-      <div class="container">
-        <span class="section-tag">Portfolio</span>
-        <h2 class="section-heading">Selected Projects</h2>
-        <p class="section-subtitle">Real products designed with research, iteration, and attention to detail.</p>
-        
-        <div class="work-grid">
-          <div class="work-card">
-            <div class="work-card-image">
-              <img src="school.png" alt="Student Patient Monitoring System" onerror="this.src='https://placehold.co/600x400/2563EB/FFFFFF?text=Health+System'">
-            </div>
-            <div class="work-card-body">
-              <div class="work-card-header">
-                <span class="work-index">01</span>
-                <span class="work-category">Healthcare UX</span>
-              </div>
-              <h3 class="work-title">Student Patient Monitoring</h3>
-              <p class="work-desc">Real-time health tracking platform for school clinics with alert systems and comprehensive patient history management.</p>
-              <div class="work-tags">
-                <span class="work-tag">Figma</span>
-                <span class="work-tag">User Flows</span>
-                <span class="work-tag">Prototyping</span>
-              </div>
-              <a href="https://www.figma.com/proto/GIsh7wZ2vCK7jYAi3Il7P9/MRA---Capstone-Project-UI-Design-for-Brgy.-Luz?node-id=3210-5524&t=eyW8iSaQCuZi97ba-0&scaling=min-zoom" target="_blank" class="work-link">View prototype →</a>
-            </div>
-          </div>
-
-          <div class="work-card">
-            <div class="work-card-image">
-              <img src="upcebu.png" alt="UP Cebu Enrollment Dashboard" onerror="this.src='https://placehold.co/600x400/10B981/FFFFFF?text=Analytics'">
-            </div>
-            <div class="work-card-body">
-              <div class="work-card-header">
-                <span class="work-index">02</span>
-                <span class="work-category">Data Viz</span>
-              </div>
-              <h3 class="work-title">UP Cebu Enrollment Dashboard</h3>
-              <p class="work-desc">Interactive analytics dashboard visualizing demographic trends across multiple academic years and programs.</p>
-              <div class="work-tags">
-                <span class="work-tag">Figma</span>
-                <span class="work-tag">Wireframing</span>
-                <span class="work-tag">Analytics</span>
-              </div>
-              <a href="https://our.upcebu.edu.ph/enrollment-data-graph/" target="_blank" class="work-link">Live dashboard →</a>
-            </div>
-          </div>
-
-          <div class="work-card">
-            <div class="work-card-image">
-              <img src="barangay.png" alt="Barangay Health Records" onerror="this.src='https://placehold.co/600x400/F59E0B/FFFFFF?text=Barangay+Health'">
-            </div>
-            <div class="work-card-body">
-              <div class="work-card-header">
-                <span class="work-index">03</span>
-                <span class="work-category">Community Tech</span>
-              </div>
-              <h3 class="work-title">Barangay Health Records</h3>
-              <p class="work-desc">Digital transformation for local health record management, designed with accessibility for low-literacy users in mind.</p>
-              <div class="work-tags">
-                <span class="work-tag">Figma</span>
-                <span class="work-tag">User Interviews</span>
-                <span class="work-tag">Wireframing</span>
-              </div>
-              <a href="#" class="work-link">Case study →</a>
-            </div>
-          </div>
-
-          <div class="work-card">
-            <div class="work-card-image">
-              <img src="ojt.png" alt="OJT Tracker System" onerror="this.src='https://placehold.co/600x400/8B5CF6/FFFFFF?text=OJT+Tracker'">
-            </div>
-            <div class="work-card-body">
-              <div class="work-card-header">
-                <span class="work-index">04</span>
-                <span class="work-category">Platform Design</span>
-              </div>
-              <h3 class="work-title">OJT Tracker & Internship Management</h3>
-              <p class="work-desc">End-to-end platform for managing applications, timesheets, and supervisor feedback loops efficiently.</p>
-              <div class="work-tags">
-                <span class="work-tag">Figma</span>
-                <span class="work-tag">Journey Maps</span>
-                <span class="work-tag">Prototyping</span>
-              </div>
-              <a href="#" class="work-link">Explore →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="padding-top: 40px;">
-      <div class="container">
-        <span class="section-tag">Credentials</span>
-        <h2 class="section-heading">Certifications</h2>
-        <p class="section-subtitle">Professional credentials — click to view full size.</p>
-        <div class="certs-grid">
-          <div class="cert-card" data-cert="UXPH.jpg">
-            <div class="cert-logo-box">
-              <img src="UXPH.jpg" alt="UXPH Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='📜';">
-            </div>
-            <div class="cert-info">
-              <h4>UXPH Design Workshops</h4>
-              <p>uxph.org · Design Community</p>
-            </div>
-          </div>
-          <div class="cert-card" data-cert="RURALNET.jpg">
-            <div class="cert-logo-box">
-              <img src="RURALNET.jpg" alt="RuralNet Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='💼';">
-            </div>
-            <div class="cert-info">
-              <h4>RuralNet Inc. · Product Designer (OJT)</h4>
-              <p>ruralnet.ph · Internship</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="padding-top: 40px;">
-      <div class="container">
-        <span class="section-tag">Toolkit</span>
-        <h2 class="section-heading">Tech & Design Stack</h2>
-        <p class="section-subtitle">Tools and technologies I use daily to design and deliver production-ready interfaces.</p>
-        <div class="stack-grid">
-          <div class="stack-chip">HTML5</div>
-          <div class="stack-chip">CSS3 / Tailwind</div>
-          <div class="stack-chip">JavaScript</div>
-          <div class="stack-chip">MySQL</div>
-          <div class="stack-chip">Git & GitHub</div>
-          <div class="stack-chip">Figma</div>
-          <div class="stack-chip">Framer</div>
-          <div class="stack-chip">Jira</div>
-        </div>
-        <div style="margin-top: 36px;">
-          <button id="backToHome" class="btn-secondary">← Back to Home</button>
-        </div>
-      </div>
-    </section>
+    <section class="section" style="padding-top: 100px;"><div class="container"><span class="section-tag">Portfolio</span><h2 class="section-heading">Selected Projects</h2><p class="section-subtitle">Real products designed with research, iteration, and attention to detail.</p><div class="work-grid"><div class="work-card"><div class="work-card-image"><img src="school.png" alt="Student Patient Monitoring System" onerror="this.src='https://placehold.co/600x400/2563EB/FFFFFF?text=Health+System'"></div><div class="work-card-body"><div class="work-card-header"><span class="work-index">01</span><span class="work-category">Healthcare UX</span></div><h3 class="work-title">Student Patient Monitoring</h3><p class="work-desc">Real-time health tracking platform for school clinics with alert systems and comprehensive patient history management.</p><div class="work-tags"><span class="work-tag">Figma</span><span class="work-tag">User Flows</span><span class="work-tag">Prototyping</span></div><a href="https://www.figma.com/proto/GIsh7wZ2vCK7jYAi3Il7P9/MRA---Capstone-Project-UI-Design-for-Brgy.-Luz?node-id=3210-5524&t=eyW8iSaQCuZi97ba-0&scaling=min-zoom" target="_blank" class="work-link">View prototype <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="15 6 19 12 15 18"/></svg></a></div></div><div class="work-card"><div class="work-card-image"><img src="upcebu.png" alt="UP Cebu Enrollment Dashboard" onerror="this.src='https://placehold.co/600x400/10B981/FFFFFF?text=Analytics'"></div><div class="work-card-body"><div class="work-card-header"><span class="work-index">02</span><span class="work-category">Data Viz</span></div><h3 class="work-title">UP Cebu Enrollment Dashboard</h3><p class="work-desc">Interactive analytics dashboard visualizing demographic trends across multiple academic years and programs.</p><div class="work-tags"><span class="work-tag">Figma</span><span class="work-tag">Wireframing</span><span class="work-tag">Analytics</span></div><a href="https://our.upcebu.edu.ph/enrollment-data-graph/" target="_blank" class="work-link">Live dashboard <svg viewBox="0 0 24 24"><polyline points="18 9 22 12 18 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg></a></div></div><div class="work-card"><div class="work-card-image"><img src="barangay.png" alt="Barangay Health Records" onerror="this.src='https://placehold.co/600x400/F59E0B/FFFFFF?text=Barangay+Health'"></div><div class="work-card-body"><div class="work-card-header"><span class="work-index">03</span><span class="work-category">Community Tech</span></div><h3 class="work-title">Barangay Health Records</h3><p class="work-desc">Digital transformation for local health record management, designed with accessibility for low-literacy users in mind.</p><div class="work-tags"><span class="work-tag">Figma</span><span class="work-tag">User Interviews</span><span class="work-tag">Wireframing</span></div><a href="#" class="work-link">Case study <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></a></div></div><div class="work-card"><div class="work-card-image"><img src="ojt.png" alt="OJT Tracker System" onerror="this.src='https://placehold.co/600x400/8B5CF6/FFFFFF?text=OJT+Tracker'"></div><div class="work-card-body"><div class="work-card-header"><span class="work-index">04</span><span class="work-category">Platform Design</span></div><h3 class="work-title">OJT Tracker & Internship Management</h3><p class="work-desc">End-to-end platform for managing applications, timesheets, and supervisor feedback loops efficiently.</p><div class="work-tags"><span class="work-tag">Figma</span><span class="work-tag">Journey Maps</span><span class="work-tag">Prototyping</span></div><a href="#" class="work-link">Explore <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.03.03A10 10 0 0 0 12 17.66a10 10 0 0 0 6.37-2.63z"/><path d="M17.66 10.17A10 10 0 0 0 12 2a10 10 0 0 0-5.66 8.17"/></svg></a></div></div></div></div></section>
+    <section class="section" style="padding-top: 40px;"><div class="container"><span class="section-tag">Credentials</span><h2 class="section-heading">Certifications</h2><p class="section-subtitle">Professional credentials — click to view full size.</p><div class="certs-grid"><div class="cert-card" data-cert="UXPH.jpg"><div class="cert-logo-box"><img src="UXPH.jpg" alt="UXPH Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='📜';"></div><div class="cert-info"><h4>UXPH Design Workshops</h4><p>uxph.org · Design Community</p></div></div><div class="cert-card" data-cert="RURALNET.jpg"><div class="cert-logo-box"><img src="RURALNET.jpg" alt="RuralNet Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='💼';"></div><div class="cert-info"><h4>RuralNet Inc. · Product Designer (OJT)</h4><p>ruralnet.ph · Internship</p></div></div></div></div></section>
+    <section class="section" style="padding-top: 40px;"><div class="container"><span class="section-tag">Toolkit</span><h2 class="section-heading">Tech & Design Stack</h2><p class="section-subtitle">Tools and technologies I use daily to design and deliver production-ready interfaces.</p><div class="stack-grid"><div class="stack-chip">HTML5</div><div class="stack-chip">CSS3 / Tailwind</div><div class="stack-chip">JavaScript</div><div class="stack-chip">MySQL</div><div class="stack-chip">Git & GitHub</div><div class="stack-chip">Figma</div><div class="stack-chip">Framer</div><div class="stack-chip">Jira</div></div><div style="margin-top: 36px;"><button id="backToHome" class="btn-secondary">← Back to Home</button></div></div></section>
   </div>
 
   <footer class="site-footer container">
@@ -1340,10 +992,7 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="closeLightbox">✕</button>
-    <img src="" alt="Certificate" id="lightboxImg">
-  </div>
+  <div class="lightbox" id="lightbox"><button class="lightbox-close" id="closeLightbox">✕</button><img src="" alt="Certificate" id="lightboxImg"></div>
 
   <script>
     (function() {
@@ -1354,9 +1003,13 @@
       const backBtn = document.getElementById('backToHome');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImg');
-      const themeToggle = document.getElementById('themeToggle');
       const burgerBtn = document.getElementById('burgerBtn');
       const mobileMenu = document.getElementById('mobileMenu');
+      
+      // Theme dropdown elements
+      const themeTrigger = document.getElementById('themeTrigger');
+      const themeMenu = document.getElementById('themeMenu');
+      const themeOptions = document.querySelectorAll('.theme-option');
 
       function showPage(page) {
         if (page === 'home') {
@@ -1366,28 +1019,20 @@
           homePage.style.display = 'none';
           workPage.style.display = 'block';
         }
-        // Update all nav buttons (desktop + mobile)
         navButtons.forEach(b => {
           b.classList.remove('active');
           if (b.dataset.page === page) b.classList.add('active');
         });
-        // Close mobile menu
         mobileMenu.classList.remove('active');
         burgerBtn.classList.remove('open');
         document.body.style.overflow = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      navButtons.forEach(btn => {
-        btn.addEventListener('click', () => showPage(btn.dataset.page));
-      });
-      brandHome.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('home');
-      });
+      navButtons.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
+      brandHome.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
       if (backBtn) backBtn.addEventListener('click', () => showPage('home'));
 
-      // Burger menu toggle
       burgerBtn.addEventListener('click', () => {
         const isOpen = mobileMenu.classList.contains('active');
         if (isOpen) {
@@ -1400,42 +1045,19 @@
           document.body.style.overflow = 'hidden';
         }
       });
-
-      // Close mobile menu when clicking a link
-      mobileMenu.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          burgerBtn.classList.remove('open');
-          document.body.style.overflow = '';
-        });
-      });
-
-      document.querySelectorAll('.cert-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const src = card.getAttribute('data-cert');
-          if (src) {
-            lightboxImg.src = src;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-      });
-      document.getElementById('closeLightbox').addEventListener('click', () => {
-        lightbox.classList.remove('active');
+      mobileMenu.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        burgerBtn.classList.remove('open');
         document.body.style.overflow = '';
-      });
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          lightbox.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          lightbox.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
+      }));
+
+      document.querySelectorAll('.cert-card').forEach(card => card.addEventListener('click', () => {
+        const src = card.getAttribute('data-cert');
+        if (src) { lightboxImg.src = src; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      }));
+      document.getElementById('closeLightbox').addEventListener('click', () => { lightbox.classList.remove('active'); document.body.style.overflow = ''; });
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) { lightbox.classList.remove('active'); document.body.style.overflow = ''; } });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) { lightbox.classList.remove('active'); document.body.style.overflow = ''; } });
 
       document.getElementById('downloadCV')?.addEventListener('click', () => {
         const a = document.createElement('a');
@@ -1446,14 +1068,65 @@
         document.body.removeChild(a);
       });
 
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+      // Theme system with Light/Dark/System + Dropdown
+      let currentTheme = localStorage.getItem('theme') || 'system';
+      
+      function applyTheme(theme) {
+        if (theme === 'system') {
+          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        // Update active state in dropdown
+        themeOptions.forEach(opt => {
+          const val = opt.getAttribute('data-theme-value');
+          if (val === theme) {
+            opt.classList.add('active');
+          } else {
+            opt.classList.remove('active');
+          }
+        });
+        localStorage.setItem('theme', theme);
+        currentTheme = theme;
+      }
+      
+      function setThemeFromValue(value) {
+        applyTheme(value);
+      }
+      
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'system';
+      applyTheme(savedTheme);
+      
+      // Listen to system preference changes if on system mode
+      const systemPrefListener = (e) => {
+        if (currentTheme === 'system') {
+          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+      };
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', systemPrefListener);
+      
+      // Dropdown toggle
+      themeTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeMenu.classList.toggle('active');
       });
+      document.addEventListener('click', (e) => {
+        if (!themeDropdown.contains(e.target)) {
+          themeMenu.classList.remove('active');
+        }
+      });
+      
+      themeOptions.forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          const value = opt.getAttribute('data-theme-value');
+          setThemeFromValue(value);
+          themeMenu.classList.remove('active');
+        });
+      });
+      
+      const themeDropdown = document.getElementById('themeDropdown');
     })();
   </script>
 </body>
